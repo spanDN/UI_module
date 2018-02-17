@@ -10,8 +10,8 @@ public interface IBasePresenter {
     void dismiss();
     interface IAuthPresenter <V extends IBaseView.IAuthView> extends IBasePresenter{
         void loginSocial(int type, Context context);
-        void signIn(String email, String password, Context context);
-        void signUp(String email, String password, String repeatPassword, Context context);
+        void signIn( String email, String password, String lang, String timeZone, String devID, Context context);
+        void signUp(String email, String password, String repeatPassword, String lang, String timeZone, String devID, Context context);
         void resetAccount(String email, Context context);
         void init(V v);
 //        void sendtoPresenterCallBack(ICallback ic);

@@ -26,4 +26,8 @@
     <string name="txt_dialog_cancel">Cancel</string>
     <string name="txt_dialog_ok">Ok</string>
     <string name="error_password_miss_match">password miss match</string>
+    <string name="action_sign_in">sign in</string>
+    <string name="action_sign_up">sign up</string>
+    <string name="action_forgot_password">forgot password</string>
+    <string name="action_login_social">login social</string>
 </resources>

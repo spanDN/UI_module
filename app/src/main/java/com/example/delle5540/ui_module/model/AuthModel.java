@@ -12,6 +12,9 @@ public class AuthModel {
     private String timeZone;
     private String devId;
 
+    public AuthModel() {
+    }
+
     public String getAction() {
         return action;
     }

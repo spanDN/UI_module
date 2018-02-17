@@ -1,6 +1,8 @@
 package com.example.delle5540.ui_module.interactors;
 
-import io.reactivex.Observable;
+import android.content.Context;
+
+import rx.Observable;
 
 /**
  * Created by dell e5540 on 2/15/2018.
@@ -14,7 +16,8 @@ public interface IAuthInteractor {
        just()
        mmapMap()
        map()
-       from() */
-    Observable<Boolean> doAuth (String action, String email, String password, String lang, String timeZone);
+       from()
+       doOnNext()*/
+    Observable<String> doAuth (Context context, String action, String email, String password, String lang, String timeZone, String devId);
 
 }
