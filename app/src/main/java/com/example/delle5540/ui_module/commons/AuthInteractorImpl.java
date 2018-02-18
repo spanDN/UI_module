@@ -1,6 +1,7 @@
 package com.example.delle5540.ui_module.commons;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Patterns;
 
 import com.example.delle5540.ui_module.R;
@@ -32,9 +33,12 @@ public class AuthInteractorImpl implements IBaseInteractor.IAuthInteractor {
         model.setLang(lang);
         model.setDevId(devId);
         return Observable.just(model).flatMap(authModel -> {
+            Log.d("AuthInteractorImpl", "Observable model to string " + authModel.toString());
             if (isEmailValid(authModel.getEmail())) {
-                return Observable.just(authModel.getAction() + "success");
+                Log.d("AuthInteractorImpl", "Valid email");
+                return Observable.just(authModel.getAction() + " success");
             } else {
+                Log.d("AuthInteractorImpl", "Invalid email");
                 return Observable.just(authModel.getEmail() + "is not valid");
             }
         });

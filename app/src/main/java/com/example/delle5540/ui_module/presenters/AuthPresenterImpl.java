@@ -2,6 +2,7 @@ package com.example.delle5540.ui_module.presenters;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.commons.BasePresenter;
@@ -41,20 +42,22 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
         String action = context.getResources().getString(R.string.action_sign_in);
         Observable<String> signInObservable = interactor.doAuth(context, action, email, password, lang, timeZone, devID);
 
-        signInObservable
-                .subscribe(response -> {
-                            view.showMessage(response);
-                        }, throwable -> {
-                            view.showMessage(throwable.getMessage());
-                        },
-                        () -> {
+// Lambda
+//        signInObservable
+//                .subscribe(response -> {
+//                            view.showMessage(response);
+//                        }, throwable -> {
+//                            view.showMessage(throwable.getMessage());
+//                        },
+//                        () -> {
+//
+//                        });
 
-                        });
-
+// Classic way
         signInObservable.subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
-
+                Log.d("OnComplete", "" );
             }
 
             @Override
@@ -64,9 +67,11 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 
             @Override
             public void onNext(String s) {
+                Log.d("OnNext ", s );
                 view.showMessage(s);
             }
         });
+
     }
 
     @Override
