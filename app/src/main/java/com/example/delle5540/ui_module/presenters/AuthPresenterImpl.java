@@ -2,17 +2,30 @@ package com.example.delle5540.ui_module.presenters;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.delle5540.ui_module.R;
+import com.example.delle5540.ui_module.activities.AuthActivity;
 import com.example.delle5540.ui_module.commons.BasePresenter;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
+import com.example.delle5540.ui_module.commons.SocialType;
+
 
 
 import rx.Observable;
 import rx.Subscriber;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookException;
+import com.facebook.login.*;
+import com.facebook.FacebookCallback;
+import com.facebook.CallbackManager;
+
+import java.util.Arrays;
+
 
 
 /**
@@ -27,14 +40,11 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
         this.interactor = interactor;
     }
 
+    private CallbackManager callbackManager;
+
     @Override
     public void dismiss() {
         super.dismiss();
-    }
-
-    @Override
-    public void loginSocial(int type, Context context) {
-        view.showMessage ("LoginSocial");
     }
 
     @Override
@@ -57,7 +67,7 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
         signInObservable.subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
-                Log.d("OnComplete", "" );
+                Log.d("OnComplete", "");
             }
 
             @Override
@@ -67,7 +77,7 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 
             @Override
             public void onNext(String s) {
-                Log.d("OnNext ", s );
+                Log.d("OnNext ", s);
                 view.showMessage(s);
             }
         });
@@ -88,4 +98,53 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
     public void init(IBaseView.IAuthView view) {
         super.init(view);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+    }
+
+    @Override
+    public void loginWithFB(AuthActivity a) {
+
+        callbackManager = CallbackManager.Factory.create();
+        if (AccessToken.getCurrentAccessToken() == null) {
+            LoginManager.getInstance().registerCallback(callbackManager, facebookCallback);
+            LoginManager.getInstance().logInWithReadPermissions(a, Arrays.asList(application.getString(R.string.facebook_scope_profile), application.getString(R.string.facebook_scope_user_friends)));
+            return;
+        }
+        final String token = AccessToken.getCurrentAccessToken().getToken();
+        this.socialLogin(SocialType.FACEBOOK, token, null);
+
+    }
+
+    @Override
+    public void loginWithGoogle(AuthActivity a) {
+
+    }
+
+    @Override
+    public void loginWithTwiter(AuthActivity a) {
+
+    }
+
+    private FacebookCallback<LoginResult> facebookCallback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            if (view == null) return;
+            final String token = AccessToken.getCurrentAccessToken().getToken();
+            Log.d("SOCIAL", "Facebook token " + token);
+        }
+
+        @Override
+        public void onCancel() {
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+            error.printStackTrace();
+            if (view == null) return;
+            view.showError(application.getString(R.string.error_text_facebook_error));
+        }
+    };
 }

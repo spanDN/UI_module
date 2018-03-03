@@ -30,4 +30,12 @@
     <string name="action_sign_up">sign up</string>
     <string name="action_forgot_password">forgot password</string>
     <string name="action_login_social">login social</string>
+    <string name="facebook_scope_profile">public_profile</string>
+    <string name="facebook_scope_user_friends">user_friends</string>
+    <string name="facebook_app_id">883193838530695</string>
+    <string name="fb_login_protocol_scheme">fb883193838530695</string>
+    error_text_facebook_error
+    <string name="error_text_facebook_error">Error login</string>
+
+
 </resources>

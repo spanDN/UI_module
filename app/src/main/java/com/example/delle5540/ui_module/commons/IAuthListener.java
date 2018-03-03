@@ -11,6 +11,6 @@ public interface IAuthListener {
     void openSignIn();
     void openSignUp();
     void openReset();
-    void loginSocial();
+    void loginSocial(int type);
  //   void sendtoPresenterCallBack(ICallback ic);
 }

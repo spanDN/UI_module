@@ -2,6 +2,7 @@ package com.example.delle5540.ui_module.activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,12 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
     IBasePresenter.IAuthPresenter presenter; // Define object of interface type
     IBaseInteractor.IAuthInteractor interactor;
     private String timeZone, language, deviceId;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +94,20 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         }
 
         @Override
-        public void loginSocial() {
+        public void loginSocial(int type) {
+            switch (type) {
+                case 1:
+                    presenter.loginWithFB(AuthActivity.this);
+                    break;
+                case 2:
+                    presenter.loginWithGoogle(AuthActivity.this);
+                    break;
+                case 3:
+                    presenter.loginWithTwiter(AuthActivity.this);
+                    break;
+            }
         }
+
 
     };
 
