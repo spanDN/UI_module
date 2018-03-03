@@ -12,6 +12,7 @@ import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.commons.IAuthListener;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
+import com.example.delle5540.ui_module.commons.SocialType;
 import com.example.delle5540.ui_module.fragments.ResetFragment;
 import com.example.delle5540.ui_module.fragments.SignInFragment;
 import com.example.delle5540.ui_module.fragments.SignUpFragment;
@@ -96,13 +97,13 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         @Override
         public void loginSocial(int type) {
             switch (type) {
-                case 1:
+                case SocialType.FACEBOOK:
                     presenter.loginWithFB(AuthActivity.this);
                     break;
-                case 2:
+                case SocialType.GOOGLE:
                     presenter.loginWithGoogle(AuthActivity.this);
                     break;
-                case 3:
+                case SocialType.TWITER:
                     presenter.loginWithTwiter(AuthActivity.this);
                     break;
             }

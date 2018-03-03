@@ -114,7 +114,8 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
             return;
         }
         final String token = AccessToken.getCurrentAccessToken().getToken();
-        this.socialLogin(SocialType.FACEBOOK, token, null);
+        Log.d("LOginWithFB", "Facebook token " + token);
+        //this.socialLogin(SocialType.FACEBOOK, token, null);
 
     }
 
