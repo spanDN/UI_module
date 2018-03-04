@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.delle5540.ui_module.activities.NavigationActivity"
+    tools:context="com.example.delle5540.ui_module.auth_operation.activities.NavigationActivity"
     tools:showIn="@layout/activity_navigation">
 
 </android.support.constraint.ConstraintLayout>

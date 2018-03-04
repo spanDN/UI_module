@@ -1,26 +1,38 @@
-package com.example.delle5540.ui_module.activities;
+package com.example.delle5540.ui_module.auth_operation.activities;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.delle5540.ui_module.ObscuraApp;
 import com.example.delle5540.ui_module.R;
+import com.example.delle5540.ui_module.activities.MainActivity;
+import com.example.delle5540.ui_module.auth_operation.fragments.ResetFragment;
+import com.example.delle5540.ui_module.auth_operation.fragments.SignInFragment;
+import com.example.delle5540.ui_module.auth_operation.fragments.SignUpFragment;
 import com.example.delle5540.ui_module.commons.IAuthListener;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.commons.SocialType;
-import com.example.delle5540.ui_module.fragments.ResetFragment;
-import com.example.delle5540.ui_module.fragments.SignInFragment;
-import com.example.delle5540.ui_module.fragments.SignUpFragment;
 import com.example.delle5540.ui_module.presenters.AuthPresenterImpl;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import com.example.delle5540.ui_module.commons.AuthInteractorImpl;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import com.facebook.appevents.AppEventsLogger;
+
+/* Need for generating  HASH KEY*/
+import 	android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+import 	android.content.pm.Signature;
+import 	java.security.MessageDigest;
+import android.util.Base64;
+/* ******************************* */
 
 
 
@@ -52,6 +64,21 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         interactor = new AuthInteractorImpl();
         presenter = new AuthPresenterImpl(getApplication(), interactor);
         presenter.init(this); // Need to pass IBaseView.IAuthView
+        AppEventsLogger.activateApp(this);
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.example.delle5540.ui_module",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+
+        } catch (java.security.NoSuchAlgorithmException e) {
+
+        }
     }
 
     /*  Methods which are used in fragment to send info to activity */
@@ -136,8 +163,11 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
     }
 
     @Override
-    public void openMain(boolean auth) {
-
+    public void openMain(String token) {
+        ((ObscuraApp) getApplication()).setFacebookToken(token); // How we can do this.
+        Intent i = new Intent(AuthActivity.this, MainActivity.class);
+        startActivity(i);
+//        overridePendingTransition();
     }
 }
 

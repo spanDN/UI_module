@@ -1,8 +1,7 @@
-package com.example.delle5540.ui_module.fragments;
+package com.example.delle5540.ui_module.auth_operation.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -16,8 +15,6 @@ import android.view.ViewGroup;
 import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.commons.IAuthListener;
 import com.example.delle5540.ui_module.commons.SocialType;
-
-import static com.example.delle5540.ui_module.commons.SocialType.FACEBOOK;
 
 
 public class SignInFragment extends Fragment {

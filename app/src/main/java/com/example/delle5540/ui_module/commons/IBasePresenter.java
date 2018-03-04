@@ -3,7 +3,7 @@ package com.example.delle5540.ui_module.commons;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.delle5540.ui_module.activities.AuthActivity;
+import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
 
 /**
  * Created by dell e5540 on 1/27/2018.

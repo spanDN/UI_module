@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.example.delle5540.ui_module.ObscuraApp;
 import com.example.delle5540.ui_module.R;
-import com.example.delle5540.ui_module.activities.AuthActivity;
+import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
 import com.example.delle5540.ui_module.commons.BasePresenter;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
-import com.example.delle5540.ui_module.commons.SocialType;
-
 
 
 import rx.Observable;
@@ -101,20 +100,25 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-
+        callbackManager.onActivityResult(requestCode, resultCode, intent);
     }
 
     @Override
     public void loginWithFB(AuthActivity a) {
 
         callbackManager = CallbackManager.Factory.create();
+        Log.d("SOCIAL", "AfterCallBackManager");
         if (AccessToken.getCurrentAccessToken() == null) {
+            Log.d("SOCIAL", "NotNUll");
             LoginManager.getInstance().registerCallback(callbackManager, facebookCallback);
             LoginManager.getInstance().logInWithReadPermissions(a, Arrays.asList(application.getString(R.string.facebook_scope_profile), application.getString(R.string.facebook_scope_user_friends)));
             return;
+        } else {
+            Log.d("SOCIAL", "!NULL " + AccessToken.getCurrentAccessToken().getToken());
+            view.openMain(AccessToken.getCurrentAccessToken().getToken());
         }
         final String token = AccessToken.getCurrentAccessToken().getToken();
-        Log.d("LOginWithFB", "Facebook token " + token);
+        Log.d("SOCIAL", "Facebook token " + token);
         //this.socialLogin(SocialType.FACEBOOK, token, null);
 
     }
@@ -135,15 +139,18 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
             if (view == null) return;
             final String token = AccessToken.getCurrentAccessToken().getToken();
             Log.d("SOCIAL", "Facebook token " + token);
+            view.openMain(token);
         }
 
         @Override
         public void onCancel() {
+            Log.d("SOCIAL", "Facebook onCancel()");
         }
 
         @Override
         public void onError(FacebookException error) {
             error.printStackTrace();
+            Log.d("SOCIAL", "Facebook onError() error " + error.toString());
             if (view == null) return;
             view.showError(application.getString(R.string.error_text_facebook_error));
         }
