@@ -1,17 +1,23 @@
 package com.example.delle5540.ui_module.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.example.delle5540.ui_module.R;
+import com.example.delle5540.ui_module.commons.IBaseView;
+import com.example.delle5540.ui_module.commons.IMainPresenter;
+import com.example.delle5540.ui_module.commons.MainPresenterImpl;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IBaseView.IMainView{
 
     private TextView mTextMessage;
+    IMainPresenter presenter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                   presenter.doLogout("Facebook", 1);
+                    Log.d("MYDEBUG" ,"HERE");
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
@@ -38,10 +46,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = new MainPresenterImpl();
+        presenter.init(this);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public void showMessage(String s) {
+
+    }
+
+    @Override
+    public void showError(String s) {
+
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void doneLogout(String token, int type) {
+
+    }
+
+    @Override
+    public void closeMain() {
+        this.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.onActivityResult(requestCode, resultCode, data);
+    }
 }

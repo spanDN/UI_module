@@ -18,6 +18,7 @@ public interface IBaseView {
     }
     interface IMainView extends IBaseView {
         void doneLogout(String token, int type);
+        void closeMain();
     }
 
  /* Сделать интерфейс отдельным классом *
