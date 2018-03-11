@@ -40,4 +40,10 @@
     <string name="title_notifications">Notifications</string>
     <string name="action_return">Return</string>
 
+    <!--string-array name="my_list_items">
+        <item>Drink</item>
+        <item>Food</item>
+        <item>Stores</item>
+    </string-array-->
+
 </resources>

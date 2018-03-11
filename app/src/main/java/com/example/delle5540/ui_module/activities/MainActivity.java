@@ -7,6 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -14,7 +18,10 @@ import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.commons.IMainPresenter;
 import com.example.delle5540.ui_module.commons.MainPresenterImpl;
+import com.example.delle5540.ui_module.model.Topic;
+
 import android.view.Menu;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements IBaseView.IMainView{
 
@@ -30,13 +37,12 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
                 case R.id.navigation_home:
                    presenter.doLogout("Facebook", 1);
                     Log.d("MYDEBUG" ,"HERE");
-                    mTextMessage.setText(R.string.title_home);
+
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -53,9 +59,21 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
         presenter = new MainPresenterImpl();
         presenter.init(this);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View itemView, int position, long id) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Position " + position, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        };
+        ListView list = (ListView)  findViewById(R.id.my_list);
+        ArrayAdapter<Topic> listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Topic.topics);
+        list.setAdapter(listAdapter);
+        list.setOnItemClickListener(itemClickListener);
     }
 
     @Override
