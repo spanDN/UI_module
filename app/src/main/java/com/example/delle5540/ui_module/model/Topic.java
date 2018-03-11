@@ -14,7 +14,19 @@ public class Topic {
             new Topic("Activity lifecycle", "Methods where actually things performed"),
             new Topic("Fragments", "More modular GUI element"),
             new Topic("MVVP", "Interaction beetwen components/model/view"),
-            new Topic("List view and Adapters",  "Display list of elements")
+            new Topic("List view and Adapters",  "Display list of elements"),
+            new Topic("More fragments","Dynamic fragment and nested fragment"),
+            new Topic("Recycler view","Recycler view"),
+            new Topic("Card view","Card view"),
+            new Topic("Navigation drawer","Navigation drawer"),
+            new Topic("SqlLite database","SqlLite database"),
+            new Topic("Basic cursor","Basic cursors"),
+            new Topic("Started services","Started services"),
+            new Topic("Bound services","Bound services details"),
+            new Topic("Relative and Grdis layout","Relative and Grdis layout"),
+            new Topic("Gradle","he gradle build tool"),
+            new Topic("The Android runtime","The Android runtime"),
+            new Topic("Distributing your apps","Distributing your apps"),
     };
 
     private Topic (String name, String description) {
