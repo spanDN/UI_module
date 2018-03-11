@@ -19,14 +19,23 @@ import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.commons.IMainPresenter;
 import com.example.delle5540.ui_module.commons.MainPresenterImpl;
 import com.example.delle5540.ui_module.model.Topic;
+import 	android.support.v7.widget.LinearLayoutManager;
 
 import android.view.Menu;
 import android.widget.Toast;
+import 	android.support.v7.widget.RecyclerView;
+import com.example.delle5540.ui_module.adapters.MainListAdapter;
 
 public class MainActivity extends AppCompatActivity implements IBaseView.IMainView{
 
     private TextView mTextMessage;
     IMainPresenter presenter;
+
+    /* Recycler view */
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
         presenter = new MainPresenterImpl();
         presenter.init(this);
 
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -70,10 +80,14 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
                 toast.show();
             }
         };
-        ListView list = (ListView)  findViewById(R.id.my_list);
-        ArrayAdapter<Topic> listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Topic.topics);
-        list.setAdapter(listAdapter);
-        list.setOnItemClickListener(itemClickListener);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_list);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new MainListAdapter(Topic.topics);
+        mRecyclerView.setAdapter(mAdapter);
+       //mRecyclerView.setOnItemClickListener(itemClickListener);
     }
 
     @Override
