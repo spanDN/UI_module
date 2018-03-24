@@ -17,10 +17,11 @@ import com.example.delle5540.ui_module.auth_operation.fragments.SignUpFragment;
 import com.example.delle5540.ui_module.commons.IAuthListener;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
+import com.example.delle5540.ui_module.commons.InteractorImpl;
 import com.example.delle5540.ui_module.commons.SocialType;
 import com.example.delle5540.ui_module.presenters.AuthPresenterImpl;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
-import com.example.delle5540.ui_module.commons.AuthInteractorImpl;
+
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -61,7 +62,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         this.language = Locale.getDefault().getDisplayLanguage();
         this.deviceId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        interactor = new AuthInteractorImpl();
+        interactor = new InteractorImpl();
         presenter = new AuthPresenterImpl(getApplication(), interactor);
         presenter.init(this); // Need to pass IBaseView.IAuthView
         AppEventsLogger.activateApp(this);

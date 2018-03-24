@@ -3,19 +3,10 @@ package com.example.delle5540.ui_module.commons;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.delle5540.ui_module.R;
-import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
-import com.example.delle5540.ui_module.interactors.IAuthInteractor;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginResult;
-
-import java.util.Arrays;
 
 /**
  * Created by dell e5540 on 3/6/2018.
