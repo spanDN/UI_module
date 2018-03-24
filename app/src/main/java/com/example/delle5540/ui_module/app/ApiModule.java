@@ -2,7 +2,6 @@ package com.example.delle5540.ui_module.app;
 
 import com.example.delle5540.ui_module.commons.InteractorImpl;
 import com.example.delle5540.ui_module.interactors.IBaseInteractor;
-import com.example.delle5540.ui_module.interactors.IInteractor;
 
 import dagger.Module;
 
@@ -13,7 +12,7 @@ import dagger.Module;
 public class ApiModule {
 
 
-    IBaseInteractor.IAuthInteractor providesInteractor() {
+    IBaseInteractor.IInteractor providesInteractor() {
         return new InteractorImpl();
     }
 }

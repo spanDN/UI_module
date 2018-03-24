@@ -1,6 +1,7 @@
 package com.example.delle5540.ui_module.auth_operation.activities;
 
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -25,6 +26,8 @@ import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import com.example.delle5540.ui_module.utils.Validator.IValidator;
+import com.example.delle5540.ui_module.utils.networkCheck.INetworkCheck;
 import com.facebook.appevents.AppEventsLogger;
 
 /* Need for generating  HASH KEY*/
@@ -33,6 +36,8 @@ import android.content.pm.PackageInfo;
 import 	android.content.pm.Signature;
 import 	java.security.MessageDigest;
 import android.util.Base64;
+
+import javax.inject.Inject;
 /* ******************************* */
 
 
@@ -41,8 +46,13 @@ import android.util.Base64;
 public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthView {
 
     IBasePresenter.IAuthPresenter presenter; // Define object of interface type
-    IBaseInteractor.IAuthInteractor interactor;
     private String timeZone, language, deviceId;
+    /* Dagger injection */
+    @Inject
+    Application application;
+    INetworkCheck NetworkCheck;
+    IValidator validator;
+    IBaseInteractor.IInteractor interactor;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

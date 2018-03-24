@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.delle5540.ui_module.ObscuraApp;
 import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
 import com.example.delle5540.ui_module.commons.BasePresenter;
@@ -17,6 +16,8 @@ import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import rx.Observable;
 import rx.Subscriber;
 
+import com.example.delle5540.ui_module.utils.Validator.IValidator;
+import com.example.delle5540.ui_module.utils.networkCheck.INetworkCheck;
 import com.facebook.AccessToken;
 import com.facebook.FacebookException;
 import com.facebook.login.*;
@@ -31,12 +32,21 @@ import java.util.Arrays;
  * Created by dell e5540 on 2/6/2018.
  */
 
-public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseInteractor.IAuthInteractor> implements IBasePresenter.IAuthPresenter<IBaseView.IAuthView> {
+public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseInteractor.IInteractor> implements IBasePresenter.IAuthPresenter<IBaseView.IAuthView> {
 
 
-    public AuthPresenterImpl(Application application, IBaseInteractor.IAuthInteractor interactor) {
+//    public AuthPresenterImpl(Application application, IBaseInteractor.IInteractor interactor) {
+//        this.application = application;
+//        this.interactor = interactor;
+//    }
+
+    public AuthPresenterImpl(Application application, IValidator validator, INetworkCheck nCheck,
+                             IBaseInteractor.IInteractor baseInteractor )
+    {
         this.application = application;
-        this.interactor = interactor;
+        this.validator = validator;
+        this.nCheck = nCheck;
+        this.baseInteractor = baseInteractor;
     }
 
     private CallbackManager callbackManager;

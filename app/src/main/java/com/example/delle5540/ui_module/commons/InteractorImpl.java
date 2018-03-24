@@ -13,7 +13,7 @@ import rx.Observable;
  * Created by dell e5540 on 2/15/2018.
  */
 
-public class InteractorImpl implements IBaseInteractor.IAuthInteractor {
+public class InteractorImpl implements IBaseInteractor.IInteractor {
 
     private boolean isEmailValid(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();

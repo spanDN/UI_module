@@ -9,7 +9,7 @@ import rx.Observable;
  */
 
 public interface IBaseInteractor {
-    interface IAuthInteractor extends IBaseInteractor {
+    interface IInteractor extends IBaseInteractor {
         Observable<String> doAuth(Context context, String action, String email, String password, String language, String timeZone, String deviceId);
     }
 }

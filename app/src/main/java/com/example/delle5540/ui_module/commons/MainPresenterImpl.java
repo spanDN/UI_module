@@ -12,7 +12,7 @@ import com.facebook.login.LoginManager;
  * Created by dell e5540 on 3/6/2018.
  */
 
-public class MainPresenterImpl extends BasePresenter<IBaseView.IMainView, IBaseInteractor.IAuthInteractor> implements IMainPresenter {
+public class MainPresenterImpl extends BasePresenter<IBaseView.IMainView, IBaseInteractor.IInteractor> implements IMainPresenter {
 
     private CallbackManager callbackManager;
 
