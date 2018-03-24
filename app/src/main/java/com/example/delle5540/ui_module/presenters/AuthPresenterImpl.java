@@ -59,7 +59,7 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
     @Override
     public void signIn(String email, String password, String lang, String timeZone, String devID, Context context) {
         String action = context.getResources().getString(R.string.action_sign_in);
-        Observable<String> signInObservable = interactor.doAuth(context, action, email, password, lang, timeZone, devID);
+        Observable<String> signInObservable = baseInteractor.doAuth(context, action, email, password, lang, timeZone, devID);
 
 // Lambda
 //        signInObservable

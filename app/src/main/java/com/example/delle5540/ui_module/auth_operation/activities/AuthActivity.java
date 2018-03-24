@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.delle5540.ui_module.ObscuraApp;
+import com.example.delle5540.ui_module.app.ObsuraApp;
 import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.activities.MainActivity;
 import com.example.delle5540.ui_module.auth_operation.fragments.ResetFragment;
@@ -50,7 +51,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
     /* Dagger injection */
     @Inject
     Application application;
-    INetworkCheck NetworkCheck;
+    INetworkCheck networkCheck;
     IValidator validator;
     IBaseInteractor.IInteractor interactor;
 
@@ -64,6 +65,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+        ((ObsuraApp)getApplication()).getAppComponent().inject(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.auth_content,
                 SignInFragment.newInstance(onAuthListener)).commit();
 
@@ -72,9 +74,9 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         this.language = Locale.getDefault().getDisplayLanguage();
         this.deviceId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        interactor = new InteractorImpl();
-        presenter = new AuthPresenterImpl(getApplication(), interactor);
+        presenter = new AuthPresenterImpl(application, validator, networkCheck,  interactor);
         presenter.init(this); // Need to pass IBaseView.IAuthView
+
         AppEventsLogger.activateApp(this);
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
