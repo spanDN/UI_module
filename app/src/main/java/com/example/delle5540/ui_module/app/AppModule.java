@@ -7,6 +7,7 @@ import com.example.delle5540.ui_module.shared_preferences.SharedPreferenceUtilsI
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
 /**
  * Created by dell e5540 on 3/13/2018.
@@ -30,5 +31,10 @@ public class AppModule {
     @AppScope
     public ISharedUtils provideSharedPreUtils(Application app) {
         return new SharedPreferenceUtilsImpl(app);
+    }
+    @Provides
+    @AppScope
+    Realm provideRealm() {
+        return Realm.getDefaultInstance();
     }
 }
