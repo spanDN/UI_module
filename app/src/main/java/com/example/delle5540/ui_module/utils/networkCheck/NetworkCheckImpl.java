@@ -14,6 +14,7 @@ public class NetworkCheckImpl implements INetworkCheck {
     public Application application;
 
     public NetworkCheckImpl(Application application) {
+        this.application = application;
     }
 
     @Override

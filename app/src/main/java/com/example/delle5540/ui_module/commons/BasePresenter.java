@@ -16,7 +16,7 @@ public abstract class BasePresenter<V extends IBaseView, I extends IBaseInteract
 
     protected Application application;
     protected IValidator validator;
-    protected INetworkCheck nCheck;
+    protected INetworkCheck networkCheck;
     protected IBaseInteractor.IInteractor baseInteractor;
 
 

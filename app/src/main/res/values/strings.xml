@@ -39,6 +39,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="action_return">Return</string>
+    <string name="error_network">Network is not available</string>
 
     <!--string-array name="my_list_items">
         <item>Drink</item>

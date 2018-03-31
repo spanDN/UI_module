@@ -45,7 +45,7 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
     {
         this.application = application;
         this.validator = validator;
-        this.nCheck = nCheck;
+        this.networkCheck = nCheck;
         this.baseInteractor = baseInteractor;
     }
 
@@ -58,6 +58,10 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 
     @Override
     public void signIn(String email, String password, String lang, String timeZone, String devID, Context context) {
+        if (!networkCheck.doNetworkCheck()) {
+            view.showError(application.getResources().getString(R.string.error_network));
+            return;
+        }
         String action = context.getResources().getString(R.string.action_sign_in);
         Observable<String> signInObservable = baseInteractor.doAuth(context, action, email, password, lang, timeZone, devID);
 
@@ -95,12 +99,18 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 
     @Override
     public void signUp(String email, String password, String repeatPassword, String lang, String timeZone, String devID, Context context) {
-
+        if (!networkCheck.doNetworkCheck()) {
+            view.showError(application.getResources().getString(R.string.error_network));
+            return;
+        }
     }
 
     @Override
     public void resetAccount(String email, Context context) {
-
+        if (!networkCheck.doNetworkCheck()) {
+            view.showError(application.getResources().getString(R.string.error_network));
+            return;
+        }
     }
 
     @Override

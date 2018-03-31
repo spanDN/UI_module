@@ -27,6 +27,8 @@ import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import com.example.delle5540.ui_module.shared_preferences.ISharedUtils;
+import com.example.delle5540.ui_module.shared_preferences.SharedPreferenceUtilsImpl;
 import com.example.delle5540.ui_module.utils.Validator.IValidator;
 import com.example.delle5540.ui_module.utils.networkCheck.INetworkCheck;
 import com.facebook.appevents.AppEventsLogger;
@@ -51,9 +53,14 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
     /* Dagger injection */
     @Inject
     Application application;
+    @Inject
     INetworkCheck networkCheck;
+    @Inject
     IValidator validator;
+    @Inject
     IBaseInteractor.IInteractor interactor;
+    @Inject
+    ISharedUtils sharedPrefernce;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -92,6 +99,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         } catch (java.security.NoSuchAlgorithmException e) {
 
         }
+        sharedPrefernce.init();
     }
 
     /*  Methods which are used in fragment to send info to activity */
