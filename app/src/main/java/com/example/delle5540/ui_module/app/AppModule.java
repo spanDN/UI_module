@@ -2,6 +2,8 @@ package com.example.delle5540.ui_module.app;
 
 import android.app.Application;
 
+import com.example.delle5540.ui_module.realm_helper.IRealmUtils;
+import com.example.delle5540.ui_module.realm_helper.RealmUtilsImpl;
 import com.example.delle5540.ui_module.shared_preferences.ISharedUtils;
 import com.example.delle5540.ui_module.shared_preferences.SharedPreferenceUtilsImpl;
 
@@ -32,9 +34,16 @@ public class AppModule {
     public ISharedUtils provideSharedPreUtils(Application app) {
         return new SharedPreferenceUtilsImpl(app);
     }
+
     @Provides
     @AppScope
     Realm provideRealm() {
         return Realm.getDefaultInstance();
+    }
+
+    @Provides
+    @AppScope
+    IRealmUtils provisesUprealUtils(Realm realm) {
+        return  new RealmUtilsImpl(realm);
     }
 }
