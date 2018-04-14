@@ -16,41 +16,11 @@ import rx.schedulers.Schedulers;
 
 public class RealmUtilsImpl implements IRealmUtils {
 
-    private Realm realm;
-
-    public RealmUtilsImpl(Realm input) {
-        this.realm = input;
-    }
-
-    @Override
-    public void add(UserRealm user) {
-        realm.beginTransaction();
-        realm.copyToRealm(user);
-        realm.commitTransaction();
-    }
-
-    @Override
-    public void remove(int id) {
-
-    }
-
-    @Override
-    public void addOrUpdate(UserRealm user) {
-
-    }
-
-    @Override
-    public void removeAll() {
-
-    }
-
-    @Override
-    public RealmResults<UserRealm> getAll() {
-        return null;
-    }
-
     private Realm mRealm;
 
+    public RealmUtilsImpl(Realm mRealm) {
+        this.mRealm = mRealm;
+    }
 
     @Override
     public Realm get() {
@@ -103,6 +73,22 @@ public class RealmUtilsImpl implements IRealmUtils {
                             mRealm.commitTransaction();
                         }).map(type->mRealm.where(type).findAll()));
     }
+
+    @Override
+    public <T extends RealmObject> Observable<T> getObject(long id, Class<T> clazz) {
+        return Observable.just(clazz)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace)
+                .flatMap(t -> Observable.just(t)
+                        .doOnSubscribe(mRealm::beginTransaction)
+                        .doOnUnsubscribe(() -> {
+                            mRealm.commitTransaction();
+                        })
+                        .doOnError(Throwable::printStackTrace)
+                        .map(type->mRealm.where(type).equalTo("user_id", id).findFirst()));
+    }
+
     @Override
     public <T extends RealmObject> Observable <T> getLastObject(Class<T> clazz) {
 

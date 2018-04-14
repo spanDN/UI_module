@@ -5,6 +5,7 @@ package com.example.delle5540.ui_module.app;
  */
 
 import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
+import com.example.delle5540.ui_module.auth_operation.activities.SplashActivity;
 
 import dagger.Component;
 
@@ -13,10 +14,12 @@ import dagger.Component;
         modules = {
                 AppModule.class,
                 UtilsModule.class,
-                ApiModule.class
+                ApiModule.class,
+                PresenterModule.class
         }
 )
 
 public interface AppComponent {
+    void inject(SplashActivity activity);
     void inject(AuthActivity activity);
 }

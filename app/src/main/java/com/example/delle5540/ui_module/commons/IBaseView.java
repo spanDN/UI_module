@@ -21,6 +21,10 @@ public interface IBaseView {
         void closeMain();
     }
 
+    interface ISplashView extends IBaseView {
+        void checkUserData(boolean is);
+    }
+
  /* Сделать интерфейс отдельным классом *
     IMainPresenter {
         doLogout(Token, Type);

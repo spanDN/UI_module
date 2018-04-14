@@ -10,7 +10,9 @@ import com.example.delle5540.ui_module.auth_operation.activities.AuthActivity;
  */
 
 public interface IBasePresenter {
+
     void dismiss();
+
     interface IAuthPresenter <V extends IBaseView.IAuthView> extends IBasePresenter{
         void signIn( String email, String password, String lang, String timeZone, String devID, Context context);
         void signUp(String email, String password, String repeatPassword, String lang, String timeZone, String devID, Context context);
@@ -24,10 +26,8 @@ public interface IBasePresenter {
 
 //      void sendtoPresenterCallBack(ICallback ic);
     }
-//    interface IMainPresenter <V extends IBaseView.IMainView> extends IBasePresenter {
-//        boolean doIsAuth();
-//        void getList();
-//        void doLogout();
-//        void init(V v);
-//    }
+    interface ISplashPresenter<V extends IBaseView.ISplashView> extends IBasePresenter{
+        void init(V v);
+        void doCheckUserData();
+    }
 }

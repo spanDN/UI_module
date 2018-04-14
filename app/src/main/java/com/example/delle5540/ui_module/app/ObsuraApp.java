@@ -24,6 +24,7 @@ public class ObsuraApp extends Application {
                 .appModule(new AppModule(this))
                 .utilsModule(new UtilsModule())
                 .apiModule(new ApiModule())
+                .presenterModule(new PresenterModule())
                 .build();
     }
 

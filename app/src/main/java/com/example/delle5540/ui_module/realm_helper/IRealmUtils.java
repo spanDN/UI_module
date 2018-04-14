@@ -15,20 +15,13 @@ import rx.Observable;
  * Created by dell e5540 on 3/31/2018.
  */
 
-public interface IRealmUtils
-{
-    void add(UserRealm user);
-    void remove(int id);
-    void addOrUpdate(UserRealm user);
-    void removeAll();
-    RealmResults<UserRealm> getAll();
-
-    /* New interface part */
+public interface IRealmUtils {
     Realm get();
     void closeRealm();
     void refresh();
     <T extends RealmObject> Observable<T> addObject(T object, Class<T> clazz);
     <T extends RealmObject> Observable<RealmResults<T>> getObjects(Class<T> clazz);
+    <T extends RealmObject> Observable<T> getObject(long id, Class<T> clazz);
     <T extends RealmObject> Observable<Class<T>> deleteObject(long id, Class<T> clazz);
     <T extends RealmObject> Observable<Class<T>> deleteAllObjects(Class<T> clazz);
     <T extends RealmObject> Observable<T> getLastObject(Class<T> clazz);
