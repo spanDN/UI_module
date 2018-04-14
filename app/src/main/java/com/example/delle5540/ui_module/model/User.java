@@ -4,10 +4,19 @@ package com.example.delle5540.ui_module.model;
  * Created by dell e5540 on 3/31/2018.
  */
 
-public class User {
+import io.realm.Realm;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
+import io.realm.annotations.PrimaryKey;
+
+
+public class User extends RealmObject {
     private long id;
     private String name;
     private String surname;
+
+    @PrimaryKey
+    int user_id; /* realm id */
 
     public long getId() {
         return id;

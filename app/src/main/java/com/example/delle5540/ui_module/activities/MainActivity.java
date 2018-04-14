@@ -143,3 +143,6 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
         presenter.onActivityResult(requestCode, resultCode, data);
     }
 }
+/*  После обновления Arduino studio
+    classpath 'io.realm:realm-gradle-plugin:3.1.4'
+*/
