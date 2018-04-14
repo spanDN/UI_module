@@ -43,4 +43,6 @@ public class RealmUtilsImpl implements IRealmUtils {
     public RealmResults<UserRealm> getAll() {
         return null;
     }
+
+
 }
