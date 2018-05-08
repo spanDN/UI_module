@@ -1,0 +1,37 @@
+Задачи
+IBaseView.IMainView интерфейс для MainActivity
+void closeMainScreen();
+
+
+MainPresenterImpl дублирует логику на AuthPresenter и контруктор
+
+Добавить метод
+realmSerevice.removeObj(1, Userreal.class).subsctibr(next-> if (next !=null) { View.closeMainScreen(); }))
+
+Должно быть yf
+
+
+
+Идеальные курсы
+40 процентов реальное кодирование, 30% реальной начитки, самостоятельная работа по начитанному.
+
+RecycleView holder.
+
+RestFULl/ post/get/put/delete Retrofit
+Base url/                      END point
+api.hhtp.base.obsura.com , .... sign_in:  email/password.
+
+fragment -> presenter -> interactor ->
+postman android
+retrofit
+
+
+ObscuraAPI
+@URlEncoded
+Post("sign_in")
+
+Observable <M> signIN(@Field("Email") String Email")
+Класc содержащий поля Json.
+
+Сканер barcode special testing;
+

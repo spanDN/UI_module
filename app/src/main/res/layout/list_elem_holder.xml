@@ -17,4 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lnButtonContainerSR"
+        android:text="Delete"/>
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply"/>
 </LinearLayout>

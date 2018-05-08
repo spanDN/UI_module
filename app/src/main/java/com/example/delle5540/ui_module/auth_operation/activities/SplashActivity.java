@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.delle5540.ui_module.R;
 import com.example.delle5540.ui_module.activities.MainActivity;
+import com.example.delle5540.ui_module.app.ObsuraApp;
 import com.example.delle5540.ui_module.commons.IBasePresenter;
 import com.example.delle5540.ui_module.commons.IBaseView;
 
@@ -17,15 +18,19 @@ public class SplashActivity extends AppCompatActivity implements IBaseView.ISpla
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
-    @Inject
-    IBasePresenter.ISplashPresenter presenter;
+//    @Inject
+//    IBasePresenter.ISplashPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_splash);
+//        ((ObsuraApp) getApplication()).getAppComponent().inject(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        presenter.init(this);
+//        presenter.init(this);
+        new Handler().postDelayed(() -> { Intent mainIntent = new Intent(SplashActivity.this, NavigationActivity.class); SplashActivity.this.startActivity(mainIntent); SplashActivity.this.finish(); }, SPLASH_DISPLAY_LENGTH);
+
     }
 
     @Override

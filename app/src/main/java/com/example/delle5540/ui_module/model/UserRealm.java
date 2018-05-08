@@ -13,6 +13,11 @@ public class UserRealm extends RealmObject {
     private String name;
     private String surname;
 
+/*  Temporary */
+    private String email;
+    private String password;
+/* ************/
+
     public UserRealm() {
     }
 
@@ -38,5 +43,21 @@ public class UserRealm extends RealmObject {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

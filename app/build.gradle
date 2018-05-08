@@ -31,7 +31,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //compile 'io.reactivex.rxjava2:rxjava:2.0.5'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.android.support:support-v4:26.+'
@@ -47,4 +46,19 @@ dependencies {
     provided 'com.google.dagger:dagger-compiler:2.7'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.google.code.gson:gson:2.6.2'
+
+
+    final RETROFIT_VERSION = '2.3.0'
+
+    //Retrofit & OHHttpClient
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.google.code.gson:gson:2.8.2'
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-scalars:$RETROFIT_VERSION"
 }

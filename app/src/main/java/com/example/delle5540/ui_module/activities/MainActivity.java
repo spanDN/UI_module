@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.util.Log;
 
 import com.example.delle5540.ui_module.R;
+import com.example.delle5540.ui_module.adapters.MainListAdapter;
 import com.example.delle5540.ui_module.commons.IBaseView;
 import com.example.delle5540.ui_module.commons.IMainPresenter;
 import com.example.delle5540.ui_module.commons.MainPresenterImpl;
@@ -24,12 +25,33 @@ import 	android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.widget.Toast;
 import 	android.support.v7.widget.RecyclerView;
-import com.example.delle5540.ui_module.adapters.MainListAdapter;
+//import com.example.delle5540.ui_module.adapters.MainListAdapter;
+import com.example.delle5540.ui_module.model.User;
+import com.example.delle5540.ui_module.utils.IItemListener;
 
 public class MainActivity extends AppCompatActivity implements IBaseView.IMainView{
 
     private TextView mTextMessage;
     IMainPresenter presenter;
+
+    private IItemListener<User> OnItemListener = new IItemListener<User>(){
+
+        @Override
+        public void remove(User model, int position) {
+            Toast.makeText(MainActivity.this, "Remove_" + model.getName(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void open(User model) {
+            Toast.makeText(MainActivity.this, "Open_" + model.getName(), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void apply(User model) {
+            Toast.makeText(MainActivity.this, "Apply_" + model.getName(), Toast.LENGTH_LONG).show();
+        }
+    };
+
 
     /* Recycler view */
     private RecyclerView mRecyclerView;
@@ -80,13 +102,14 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
                 toast.show();
             }
         };
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_list);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        //mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MainListAdapter(Topic.topics);
-        mRecyclerView.setAdapter(mAdapter);
+     //   mAdapter = new ListAdapter(Topic.topics);
+     //   mRecyclerView.setAdapter(mAdapter);
        //mRecyclerView.setOnItemClickListener(itemClickListener);
     }
 
@@ -143,6 +166,3 @@ public class MainActivity extends AppCompatActivity implements IBaseView.IMainVi
         presenter.onActivityResult(requestCode, resultCode, data);
     }
 }
-/*  После обновления Arduino studio
-    classpath 'io.realm:realm-gradle-plugin:3.1.4'
-*/

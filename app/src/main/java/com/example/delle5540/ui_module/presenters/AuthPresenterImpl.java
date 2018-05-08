@@ -16,6 +16,9 @@ import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import rx.Observable;
 import rx.Subscriber;
 
+import com.example.delle5540.ui_module.model.UserRealm;
+import com.example.delle5540.ui_module.realm_helper.IRealmUtils;
+import com.example.delle5540.ui_module.realm_helper.RealmUtilsImpl;
 import com.example.delle5540.ui_module.utils.Validator.IValidator;
 import com.example.delle5540.ui_module.utils.networkCheck.INetworkCheck;
 import com.facebook.AccessToken;
@@ -34,19 +37,14 @@ import java.util.Arrays;
 
 public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseInteractor.IInteractor> implements IBasePresenter.IAuthPresenter<IBaseView.IAuthView> {
 
-
-//    public AuthPresenterImpl(Application application, IBaseInteractor.IInteractor interactor) {
-//        this.application = application;
-//        this.interactor = interactor;
-//    }
-
     public AuthPresenterImpl(Application application, IValidator validator, INetworkCheck nCheck,
-                             IBaseInteractor.IInteractor baseInteractor )
+                             IBaseInteractor.IInteractor baseInteractor, IRealmUtils realmutils)
     {
         this.application = application;
         this.validator = validator;
         this.networkCheck = nCheck;
         this.baseInteractor = baseInteractor;
+        this.realmUtils = realmutils;
     }
 
     private CallbackManager callbackManager;
@@ -62,8 +60,22 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
             view.showError(application.getResources().getString(R.string.error_network));
             return;
         }
-        String action = context.getResources().getString(R.string.action_sign_in);
-        Observable<String> signInObservable = baseInteractor.doAuth(context, action, email, password, lang, timeZone, devID);
+
+        baseInteractor.signIn(email, password).subscribe(
+                next ->{
+                    Log.d("RETy", "My first response " + next);
+                }, throwable -> {
+                    Log.d("RETy", "My first response throwable " + throwable.getMessage());
+                }
+        );
+//        UserRealm user = new UserRealm();
+//        user.setId(1);
+//        user.setEmail(email);
+//        realmUtils.addObject(user, UserRealm.class).subscribe();
+
+
+//        String action = context.getResources().getString(R.string.action_sign_in);
+//        Observable<String> signInObservable = baseInteractor.doAuth(context, action, email, password, lang, timeZone, devID);
 
 // Lambda
 //        signInObservable
@@ -77,23 +89,24 @@ public class AuthPresenterImpl extends BasePresenter<IBaseView.IAuthView, IBaseI
 //                        });
 
 // Classic way
-        signInObservable.subscribe(new Subscriber<String>() {
-            @Override
-            public void onCompleted() {
-                Log.d("OnComplete", "");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                view.showMessage(e.getMessage());
-            }
-
-            @Override
-            public void onNext(String s) {
-                Log.d("OnNext ", s);
-                view.showMessage(s);
-            }
-        });
+//        signInObservable.subscribe(new Subscriber<String>() {
+//            @Override
+//            public void onCompleted() {
+//                Log.d("OnComplete", "");
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                view.showMessage(e.getMessage());
+//            }
+//
+//            @Override
+//            public void onNext(String s) {
+//                Log.d("OnNext ", s);
+//                view.showMessage(s);
+//            }
+//        });
+//
 
     }
 

@@ -40,6 +40,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="action_return">Return</string>
     <string name="error_network">Network is not available</string>
+    <string name="base_url">http://37.57.92.40:8084/api/</string>
+    <string name="action_request">REST_REQUEST</string>
+    <string name="error_text_no_internet">Network error</string>
 
     <!--string-array name="my_list_items">
         <item>Drink</item>

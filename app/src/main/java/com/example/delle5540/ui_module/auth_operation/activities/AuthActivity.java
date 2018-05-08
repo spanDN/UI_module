@@ -27,6 +27,7 @@ import com.example.delle5540.ui_module.interactors.IBaseInteractor;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import com.example.delle5540.ui_module.realm_helper.IRealmUtils;
 import com.example.delle5540.ui_module.shared_preferences.ISharedUtils;
 import com.example.delle5540.ui_module.shared_preferences.SharedPreferenceUtilsImpl;
 import com.example.delle5540.ui_module.utils.Validator.IValidator;
@@ -48,19 +49,23 @@ import javax.inject.Inject;
 
 public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthView {
 
+    @Inject
     IBasePresenter.IAuthPresenter presenter; // Define object of interface type
+
     private String timeZone, language, deviceId;
     /* Dagger injection */
-    @Inject
-    Application application;
-    @Inject
-    INetworkCheck networkCheck;
-    @Inject
-    IValidator validator;
-    @Inject
-    IBaseInteractor.IInteractor interactor;
-    @Inject
-    ISharedUtils sharedPrefernce;
+//    @Inject
+//    Application application;
+//    @Inject
+//    INetworkCheck networkCheck;
+//    @Inject
+//    IValidator validator;
+//    @Inject
+//    IBaseInteractor.IInteractor interactor;
+//    @Inject
+//    ISharedUtils sharedPrefernce;
+//    @Inject
+//    IRealmUtils realmutils;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -81,7 +86,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         this.language = Locale.getDefault().getDisplayLanguage();
         this.deviceId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        presenter = new AuthPresenterImpl(application, validator, networkCheck,  interactor);
+//        presenter = new AuthPresenterImpl(application, validator, networkCheck, interactor, realmutils);
         presenter.init(this); // Need to pass IBaseView.IAuthView
 
         AppEventsLogger.activateApp(this);
@@ -99,7 +104,7 @@ public class  AuthActivity extends AppCompatActivity implements IBaseView.IAuthV
         } catch (java.security.NoSuchAlgorithmException e) {
 
         }
-        sharedPrefernce.init();
+//        sharedPrefernce.init();
     }
 
     /*  Methods which are used in fragment to send info to activity */
